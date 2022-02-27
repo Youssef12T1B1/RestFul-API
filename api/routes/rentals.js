@@ -3,23 +3,21 @@ const router = express.Router()
 
 
 router.get('/', (req,res, next)=>{
-
-  
     res.status(200).json({
-        message: 'Handling get movies Route'
+        message: 'rentals were fetched'
     })
 })
 
 router.post('/', (req,res, next)=>{
     res.status(201).json({
-        message: 'Handling  post movies Route'
+        message: 'rentals was created'
     })
 })
 
 router.get('/:id', (req,res, next)=>{
     const id = req.params.id
     res.status(200).json({
-        message: 'order details',
+        message: 'Handling a single movie rental',
         id: id 
     })
 })
@@ -27,14 +25,14 @@ router.get('/:id', (req,res, next)=>{
 router.patch('/:id', (req,res, next)=>{
 
     res.status(200).json({
-        message: 'Updated order',
+        message: 'Updated rental',
         
     })
 })
 router.delete('/:id', (req,res, next)=>{
 
     res.status(200).json({
-        message: 'deleted order',
+        message: 'deleted rental',
         
     })
 })
