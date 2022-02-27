@@ -2,10 +2,13 @@ const express = require("express");
 const morgan = require('morgan')
 const app = express()
 const bodyparser = require('body-parser')
-
+const moongose = require('mongoose')
 const movieRoute = require('./api/routes/movies')
 const rentalRoute = require('./api/routes/rentals')
+const connectDb = require('./config/db')
 
+
+connectDb()
 app.use(morgan('dev'))
 app.use(bodyparser.urlencoded({ extended: false}))
 app.use(bodyparser.json())
@@ -24,7 +27,7 @@ next()
 })
 
 app.use('/movies', movieRoute)
-app.use('/rental', rentalRoute)
+app.use('/rentals', rentalRoute)
 
 
 app.use((req,res,next)=>{
