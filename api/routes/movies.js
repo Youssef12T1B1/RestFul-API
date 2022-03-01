@@ -4,6 +4,7 @@ const { request } = require('../../app')
 const router = express.Router()
 const multer = require('multer')
 const Movie = require('../models/Movie')
+const ensureAuthenticated = require('../auth/ensureAuthenticated')
 
 const storage = multer.diskStorage({
  destination : function(req, file, cb){
@@ -63,8 +64,8 @@ router.get('/', (req,res, next)=>{
     
 })
 
-router.post('/',upload.single('poster'), (req, res, next)=>{
-   // console.log(req.file);
+router.post('/',ensureAuthenticated, upload.single('poster'), (req, res, next)=>{
+  
     const movie = new Movie({
         title: req.body.title,
         storyline :  req.body.storyline,
@@ -127,7 +128,7 @@ router.get('/:id', (req,res, next)=>{
     })
 })
 
-router.patch('/:id', (req,res, next)=>{
+router.patch('/:id',ensureAuthenticated, (req,res, next)=>{
     const id = req.params.id
     const updateOps ={}
     for(const ops of req.body){
@@ -157,7 +158,7 @@ router.patch('/:id', (req,res, next)=>{
    
 })
 
-router.delete('/:id', (req,res, next)=>{
+router.delete('/:id',ensureAuthenticated, (req,res, next)=>{
  const id = req.params.id
  Movie.remove({ _id: id})
  .exec()

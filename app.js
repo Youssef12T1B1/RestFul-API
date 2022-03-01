@@ -5,7 +5,8 @@ const bodyparser = require('body-parser')
 const moongose = require('mongoose')
 const movieRoute = require('./api/routes/movies')
 const rentalRoute = require('./api/routes/rentals')
-const connectDb = require('./config/db')
+const userRoute = require('./api/routes/user')
+const connectDb = require('./api/config/db')
 
 
 connectDb()
@@ -29,6 +30,7 @@ next()
 
 app.use('/movies', movieRoute)
 app.use('/rentals', rentalRoute)
+app.use('/user', userRoute)
 
 
 app.use((req,res,next)=>{
