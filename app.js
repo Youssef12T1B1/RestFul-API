@@ -10,6 +10,7 @@ const connectDb = require('./config/db')
 
 connectDb()
 app.use(morgan('dev'))
+app.use('/images',express.static('Images'))
 app.use(bodyparser.urlencoded({ extended: false}))
 app.use(bodyparser.json())
 
